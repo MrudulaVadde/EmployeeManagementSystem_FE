@@ -1,0 +1,28 @@
+<div class="container">
+    <button type="button" (click)="button()"> get data</button>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>EmpId</th>&nbsp;&nbsp;
+            <th>Empname</th>&nbsp;&nbsp;
+            <th>Gender</th>&nbsp;&nbsp;
+            <th>EmpEmail</th>&nbsp;&nbsp;
+            <th>EmpPhone</th>&nbsp;&nbsp;
+            <th>Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees">
+            <td>{{employee.empId}}</td>&nbsp;&nbsp;
+            <td>{{employee.empname}}</td>&nbsp;&nbsp;
+            <td>{{employee.gender}}</td>&nbsp;&nbsp;
+            <td>{{employee.empEmail}}</td>&nbsp;&nbsp;
+            <td>{{employee.empPhone}}</td>&nbsp;&nbsp;
+            <td>{{employee.salary}}</td>
+        </tr>
+    </tbody>
+
+</table>
+
+</div>
