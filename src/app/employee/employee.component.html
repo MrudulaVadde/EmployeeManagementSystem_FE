@@ -1,10 +1,11 @@
 <div class="container">
-    <button type="button" (click)="button()"> get data</button>
+    <button type="button" (click)="getEmployee()"> get data</button>
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>EmpId</th>&nbsp;&nbsp;
+            <th>OrgId</th>&nbsp;&nbsp;
             <th>Empname</th>&nbsp;&nbsp;
             <th>Gender</th>&nbsp;&nbsp;
             <th>EmpEmail</th>&nbsp;&nbsp;
@@ -13,13 +14,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let employee of employees">
-            <td>{{employee.empId}}</td>&nbsp;&nbsp;
-            <td>{{employee.empname}}</td>&nbsp;&nbsp;
-            <td>{{employee.gender}}</td>&nbsp;&nbsp;
-            <td>{{employee.empEmail}}</td>&nbsp;&nbsp;
-            <td>{{employee.empPhone}}</td>&nbsp;&nbsp;
-            <td>{{employee.salary}}</td>
+        <tr *ngFor="let o of org">
+            <td>{{o.employee.empId}}</td>&nbsp;&nbsp;
+            <td><a [routerLink]="['/orgdetails',o.orgId]">{{o.orgId}}</a></td>&nbsp;&nbsp;
+            <td>{{o.employee.empname}}</td>&nbsp;&nbsp;
+            <td>{{o.employee.gender}}</td>&nbsp;&nbsp;
+            <td>{{o.employee.empEmail}}</td>&nbsp;&nbsp;
+            <td>{{o.employee.empPhone}}</td>&nbsp;&nbsp;
+            <td>{{o.employee.salary}}</td>
         </tr>
     </tbody>
 

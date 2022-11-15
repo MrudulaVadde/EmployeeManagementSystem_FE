@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { employee } from 'src/employee';
+import { organization } from 'src/organization';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -8,15 +10,20 @@ import { EmployeeService } from '../employee.service';
 })
 export class EmployeeComponent implements OnInit {
 
-    employees:any;
+    org:organization[]=[];
+    emp:employee;
 
   constructor(private service:EmployeeService) { }
 
   ngOnInit(): void {
+    this.emp=new employee();
   }
 
-  button(){
-    this.employees=this.service.getEmployee().subscribe(data=>this.employees=data);
+  getEmployee(){
+    this.service.getEmployee().subscribe(
+      data=>{
+        this.org=data
+      });
   }
 
 }
