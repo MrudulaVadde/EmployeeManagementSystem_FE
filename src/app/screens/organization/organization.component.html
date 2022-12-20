@@ -1,0 +1,172 @@
+<div class="containerClass">
+  <div class="navBarClass">
+    <h2>EMPLOYMENT MANAGEMENT APPLICATION</h2>
+  </div>
+  <div class="mainSectionClass">
+    <div class="menuBarClass">
+      <button type="button" class="btn btn-primary" (click)="handleGoBack()">
+        Go Back
+      </button>
+      <button type="button" class="btn btn-primary" (click)="handleDetails()">
+        Organization Details
+      </button>
+      <button type="button" class="btn btn-primary" (click)="handleAdd()">
+        Add Organization
+      </button>
+      <signout-button></signout-button>
+    </div>
+    <div class="contentClass">
+      <div *ngIf="pageType === 'details'" class="employeeDetailsClass">
+        <div style="display: flex; justify-content: center; margin-top: 12px">
+          <h3>ORGANIZATION DETAILS</h3>
+        </div>
+        <div class="card tableCardClass">
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">S No</th>
+                  <th scope="col">Organization Name</th>
+                  <th scope="col">Organization Type</th>
+                  <th scope="col">Organization Location</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of organizatinDetails">
+                  <th scope="row">{{ data.sno }}</th>
+                  <td>{{ data && data.orgName }}</td>
+                  <td>{{ data.orgType }}</td>
+                  <td>{{ data.orgLocation }}</td>
+                  <td>
+                    <div style="display: flex; column-gap: 12px">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="handleUpdate(data.orgId)"
+                      >
+                        Update Details
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="handleDelete(data.orgId)"
+                      >
+                        Delete Details
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="pageType === 'add' || pageType === 'update'"
+        class="card addDetailsCardClass"
+      >
+        <div style="display: flex; justify-content: center; margin-top: 12px">
+          <h3>
+            {{
+              pageType === "add"
+                ? "ADD ORGANIZATION DETAILS"
+                : "UPDATE ORGANIZATION DETAILS"
+            }}
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="cardClass">
+            <form
+              class="form"
+              [formGroup]="organizationForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="form-group">
+                <label for="orgName">Organization Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="orgName"
+                  formControlName="orgName"
+                  placeholder="Enter Organization Name"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label for="orgType">Organization Type</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="orgType"
+                  formControlName="orgType"
+                  placeholder="Enter Employee Email ID"
+                />
+              </div>
+              <div class="form-group">
+                <label for="orgLocation">Organization Location</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="orgLocation"
+                  formControlName="orgLocation"
+                  placeholder="Enter Organization Location"
+                />
+              </div>
+              <div
+                style="display: flex; justify-content: center; margin-top: 12px"
+              >
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="isDeleted && pageType === 'details'"
+        style="
+          display: flex;
+          width: auto;
+          justify-content: center;
+          padding: 1rem;
+        "
+      >
+        <alert type="success"> Details Deleted Successfully </alert>
+      </div>
+
+      <div
+        *ngIf="isError && (pageType === 'add' || pageType === 'update')"
+        style="
+          display: flex;
+          width: auto;
+          justify-content: center;
+          padding: 1rem;
+        "
+      >
+        <alert type="danger">
+          All Organization Details are Required !!! Kindly enter details and Submit
+        </alert>
+      </div>
+
+      <div
+        *ngIf="isSuccess && (pageType === 'add' || pageType === 'update')"
+        style="
+          display: flex;
+          width: auto;
+          justify-content: center;
+          padding: 1rem;
+        "
+      >
+        <alert type="success">
+          {{
+            pageType === "add"
+              ? "Organization Details Saved Successfully !!"
+              : "Organization Details Updated Successfully !!"
+          }}
+        </alert>
+      </div>
+    </div>
+  </div>
+</div>

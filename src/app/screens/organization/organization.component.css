@@ -1,0 +1,59 @@
+.containerClass {
+  height: 100vh;
+}
+
+.navBarClass {
+  height: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainSectionClass {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  height: inherit;
+}
+
+.menuBarClass {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  padding: 10px 10px;
+}
+
+.contentClass {
+  background: #4CA1AF;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #C4E0E5, #4CA1AF);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #C4E0E5, #4CA1AF);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.tableCardClass {
+  width: auto;
+  height: auto;
+  margin: 1.6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.addDetailsCardClass {
+  width: 35%;
+  height: auto;
+  margin: 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-left: 35rem;
+}
+
+.form-group {
+  padding: 0.5rem;
+}
+
+input {
+  margin-top: 8px;
+}

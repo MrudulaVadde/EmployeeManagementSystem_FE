@@ -1,0 +1,201 @@
+<div class="containerClass">
+  <div class="navBarClass">
+    <h2>EMPLOYMENT MANAGEMENT APPLICATION</h2>
+  </div>
+  <div class="mainSectionClass">
+    <div class="menuBarClass">
+      <button type="button" class="btn btn-primary" (click)="handleDetails()">
+        Employee Details
+      </button>
+      <button type="button" class="btn btn-primary" (click)="handleAdd()">
+        Add Employees
+      </button>
+      <signout-button></signout-button>
+    </div>
+    <div class="contentClass">
+      <div *ngIf="pageType === 'details'" class="employeeDetailsClass">
+        <div style="display: flex; justify-content: center; margin-top: 12px">
+          <h3>EMPLOYEE DETAILS</h3>
+        </div>
+        <div class="card tableCardClass">
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">S No</th>
+                  <th scope="col">Employee Name</th>
+                  <th scope="col">Employee EmailID</th>
+                  <th scope="col">Employee Gender</th>
+                  <th scope="col">Employee Phone Number</th>
+                  <th scope="col">Employee Salary</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let data of employeeDetails">
+                <tr *ngIf="email==data.empEmail">
+                  <th scope="row">{{ data.sNo }}</th>
+                  <td>{{ data.empName }}</td>
+                  <td>{{ data.empEmail }}</td>
+                  <td>{{ data.gender }}</td>
+                  <td>{{ data.empPhone }}</td>
+                  <td>$ {{ data.salary }}</td>
+                  <td>
+                    <div style="display: flex; column-gap: 12px">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="handleUpdate(data.empId)"
+                      >
+                        Update Details
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="goToOrg(data.empId)"
+                      >
+                        Organization Details
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        (click)="handleDelete(data.empId)"
+                      >
+                        Delete Details
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="pageType === 'add' || pageType === 'update'"
+        class="card addDetailsCardClass"
+      >
+        <div style="display: flex; justify-content: center; margin-top: 12px">
+          <h3>
+            {{
+              pageType === "add"
+                ? "ADD EMPLOYEE DETAILS"
+                : "UPDATE EMPLOYEE DETAILS"
+            }}
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="cardClass">
+            <form
+              class="form"
+              [formGroup]="employeeForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="form-group">
+                <label for="empName">Employee Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="empName"
+                  formControlName="empName"
+                  placeholder="Enter Employee Name"
+                  required=""
+                />
+              </div>
+              <div class="form-group" *ngIf="pageType==='add'">
+                <label for="empEmail">Employee Email ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="empEmail"
+                  formControlName="empEmail"
+                  placeholder="Enter Employee Email ID"
+                />
+              </div>
+              <div class="form-group">
+                <label for="gender">Employee Gender</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="gender"
+                  formControlName="gender"
+                  placeholder="Enter Employee Gender"
+                />
+              </div>
+              <div class="form-group">
+                <label for="empPhone">Employee Phone Number</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="empPhone"
+                  formControlName="empPhone"
+                  placeholder="Enter Employee Phone Number"
+                />
+              </div>
+              <div class="form-group">
+                <label for="salary">Employee Salary</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="salary"
+                  formControlName="salary"
+                  placeholder="Enter Employee Salary"
+                />
+              </div>
+              <div
+                style="display: flex; justify-content: center; margin-top: 12px"
+              >
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+            <p style="font-size: 12px;">* Add Email id that you used to log in</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="isDeleted && pageType === 'details'"
+        style="
+          display: flex;
+          width: auto;
+          justify-content: center;
+          padding: 1rem;
+        "
+      >
+        <alert type="success"> Details Deleted Successfully </alert>
+      </div>
+
+      <div
+        *ngIf="isError && (pageType === 'add' || pageType === 'update')"
+        style="
+          display: flex;
+          width: auto;
+          justify-content: center;
+          padding: 1rem;
+        "
+      >
+        <alert type="danger">
+          All Employee Details are Required !!! Kindly enter details and Submit
+        </alert>
+      </div>
+
+      <div
+        *ngIf="isSuccess && (pageType === 'add' || pageType === 'update')"
+        style="
+          display: flex;
+          width: auto;
+          justify-content: center;
+          padding: 1rem;
+        "
+      >
+        <alert type="success">
+          {{
+            pageType === "add"
+              ? "Employee Details Saved Successfully !!"
+              : "Employee Details Updated Successfully !!"
+          }}
+        </alert>
+      </div>
+    </div>
+  </div>
+</div>
